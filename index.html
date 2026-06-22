@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC RFVA - الوكالة العقارية لمدينة الجزائر | Real Estate Agency of Algiers</title>
+    <link rel="icon" type="image/jpeg" href="asset/img/logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="scroll-smooth">
+    <!-- Component Placeholders -->
+    <div id="navbar-container"></div>
+    <div id="hero-container"></div>
+    <div id="stats-container"></div>
+    <div id="about-container"></div>
+    <div id="services-container"></div>
+    <div id="projects-container"></div>
+    <div id="news-container"></div>
+    <div id="contact-container"></div>
+    <div id="footer-container"></div>
+
+    <!-- Load Components Script -->
+    <script>
+        async function loadComponents() {
+            const components = [
+                { id: 'navbar-container', file: 'components/navbar.html' },
+                { id: 'hero-container', file: 'components/hero.html' },
+                { id: 'stats-container', file: 'components/stats.html' },
+                { id: 'about-container', file: 'components/about.html' },
+                { id: 'services-container', file: 'components/services.html' },
+                { id: 'projects-container', file: 'components/projects.html' },
+                { id: 'news-container', file: 'components/news.html' },
+                { id: 'contact-container', file: 'components/contact.html' },
+                { id: 'footer-container', file: 'components/footer.html' }
+            ];
+
+            for (const component of components) {
+                try {
+                    const response = await fetch(component.file);
+                    const html = await response.text();
+                    document.getElementById(component.id).innerHTML = html;
+                } catch (error) {
+                    console.error(`Error loading ${component.file}:`, error);
+                }
+            }
+
+            // Load main JavaScript after components are loaded
+            const script = document.createElement('script');
+            script.src = 'js/main.js';
+            document.body.appendChild(script);
+        }
+
+        loadComponents();
+    </script>
+</body>
+</html>
